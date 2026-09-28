@@ -1,0 +1,43 @@
+# Reagent Template: SPRI Bead Purification
+# All volumes in uL, all timings in seconds unless otherwise stated.
+
+bead_ratio = 1.2                       # bead : sample volume ratio
+surplus_factor = 1.25                  # covers liquid-class correction (up to ~1.20x) plus margin
+dead_volume_per_reservoir_well_uL = 500  # ~0.5 mL dead volume per reagent well
+
+[input_sample]
+vol_per_well_uL = 50
+description = "PCR reaction product volume per well"
+
+[timings]
+# Per Omega Bio-tek M1378 SOP (QMF27.0002 v2.1). Seconds.
+bind_incubation_s     = 300    # Step 6: 5 min RT bind
+magnetisation_s       = 180    # Steps 7, 18: "until cleared" — 3 min proxy
+ethanol_exposure_s    = 60     # Step 10: 1 min RT wash
+drying_s              = 600    # Step 13: 5-15 min air dry (picked mid-range)
+elute_incubation_s    = 300    # Step 17: 5 min RT elute
+simulation_override_s = 2      # Clamp applied when protocol_mode == "simulation"
+
+[reagents.beads]
+name = "Mag-Bind Total Pure NGS"
+# vol_per_well_uL omitted — computed at runtime as input_sample.vol_per_well_uL * bead_ratio
+uses_per_well = 1
+step = "1.1_add_beads"
+reservoir_well = [1]
+liquid_class = "beads"
+
+[reagents.elution_buffer]
+name = "Elution buffer"
+vol_per_well_uL = 35
+uses_per_well = 1
+step = "3.2_add_elution"
+reservoir_well = [2]
+liquid_class = "elution_buffer"
+
+[reagents.ethanol_70]
+name = "70% ethanol"
+vol_per_well_uL = 200
+uses_per_well = 2
+step = "2.1_wash_ethanol"
+reservoir_well = [1]  # dedicated ethanol70 troughplate (single well), not the shared reagent reservoir
+liquid_class = "ethanol_70"
