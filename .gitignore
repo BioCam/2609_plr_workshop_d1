@@ -1,1 +1,19 @@
+# logs
 *.log
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# editors
+.vscode/
+.idea/
