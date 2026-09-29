@@ -1,0 +1,34 @@
+# Plate reader traffic: hexadecimal bytes
+# > computer to reader; < reader to computer
+# One complete application message per line.
+
+# Focused protocol example: door controls and a direct reading at default gain 1.
+# Scene: the reader starts closed with default settings
+# Action: user clicks Open to load a plate
+> A7 03 06 00 00 00 00 FF
+< A7 83 06 00 00 00 00 FF
+
+# Scene: door is open
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 01 00 FF
+
+# Action: user clicks Close before reading
+> A7 03 07 00 00 00 00 FF
+< A7 83 07 00 00 00 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+
+# Action: user clicks Read with default gain 1; application displays a 96-well plate of results
+> A7 03 20 00 00 00 00 FF
+< A7 83 20 00 02 B2 04 49 02 16 02 95 04 A1 02 E3 03 13 04 B2 03 7F 01 A7 03 93 06 34 02 5C 02 43 01 ED 03 70 02 CF 03 FA 04 CF 04 2D 01 50 02 27 02 EF 02 26 02 65 02 26 03 6E 01 E6 02 16 03 53 08 31 03 43 03 20 05 B5 02 7B 03 48 03 6D 02 BB 07 26 03 C7 02 4A 02 B1 02 4E 05 B8 02 D5 03 87 02 AA 02 71 07 CA 03 17 03 5F 05 14 07 9F 02 EB 06 95 04 D3 02 10 02 C0 02 44 03 55 02 43 02 32 04 CC 02 B8 04 10 04 AE 01 C7 04 9C 03 3B 04 3D 03 2B 03 40 03 61 03 B1 02 95 04 F1 02 A1 02 CE 05 66 02 D6 02 3D 03 6D 05 48 03 BE 02 48 02 B5 04 09 02 35 01 D1 03 FD 02 24 02 9D 02 E0 03 86 04 48 03 50 00 FF
+
+# Vendor application display for this example reading (RLU)
+# Columns:     1     2     3     4     5     6     7     8     9    10    11    12
+# A:         690  1097   534   661  1185   739   787  1202   895   423   915  1588
+# B:         604   579   493   880   719  1018  1231  1069   336   551   751   550
+# C:         613   550   878   486   534   851  2097   835   800  1461   635   840
+# D:         877   699  1830   967   586   689   590  1464   725   903   682   625
+# E:        1994   791   863  1300  1951   747  1685  1235   528   704   580   853
+# F:         579   562  1228   696  1040  1198   455  1180   827  1085   811   832
+# G:         865   945   661  1265   673   718  1382   726   573   877  1352   958
+# H:         584   693  1033   565   465  1021   548   669   736   902  1096   848

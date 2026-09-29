@@ -1,0 +1,70 @@
+# Plate reader traffic: hexadecimal bytes
+# > computer to reader; < reader to computer
+# Prepared example using the desktop application command sequence and current firmware.
+# One complete application message per line; periodic background state polls omitted.
+
+# Scene: connect to a freshly powered reader; door is closed
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+
+# Action: enter gain 1; no command is sent until Set gain is clicked
+# Action: click Set gain with value 1
+> A7 03 31 00 00 01 00 FF
+< A7 83 31 00 00 01 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+
+# Action: click Read plate in luminescence mode with applied gain 1
+# Reading preparation resets the reader, then reapplies the last applied gain.
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+> A7 03 04 00 00 00 00 FF
+< A7 83 04 00 00 00 00 FF
+> A7 03 31 00 00 01 00 FF
+< A7 83 31 00 00 01 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+> A7 03 20 00 00 00 00 FF
+< A7 83 20 00 02 B2 04 49 02 16 02 95 04 A1 02 E3 03 13 04 B2 03 7F 01 A7 03 93 06 34 02 5C 02 43 01 ED 03 70 02 CF 03 FA 04 CF 04 2D 01 50 02 27 02 EF 02 26 02 65 02 26 03 6E 01 E6 02 16 03 53 08 31 03 43 03 20 05 B5 02 7B 03 48 03 6D 02 BB 07 26 03 C7 02 4A 02 B1 02 4E 05 B8 02 D5 03 87 02 AA 02 71 07 CA 03 17 03 5F 05 14 07 9F 02 EB 06 95 04 D3 02 10 02 C0 02 44 03 55 02 43 02 32 04 CC 02 B8 04 10 04 AE 01 C7 04 9C 03 3B 04 3D 03 2B 03 40 03 61 03 B1 02 95 04 F1 02 A1 02 CE 05 66 02 D6 02 3D 03 6D 05 48 03 BE 02 48 02 B5 04 09 02 35 01 D1 03 FD 02 24 02 9D 02 E0 03 86 04 48 03 50 00 FF
+
+# Vendor application display at gain 1 (RLU)
+# Columns:     1     2     3     4     5     6     7     8     9    10    11    12
+# A:         690  1097   534   661  1185   739   787  1202   895   423   915  1588
+# B:         604   579   493   880   719  1018  1231  1069   336   551   751   550
+# C:         613   550   878   486   534   851  2097   835   800  1461   635   840
+# D:         877   699  1830   967   586   689   590  1464   725   903   682   625
+# E:        1994   791   863  1300  1951   747  1685  1235   528   704   580   853
+# F:         579   562  1228   696  1040  1198   455  1180   827  1085   811   832
+# G:         865   945   661  1265   673   718  1382   726   573   877  1352   958
+# H:         584   693  1033   565   465  1021   548   669   736   902  1096   848
+
+# Action: enter gain 2; no command is sent until Set gain is clicked
+# Action: click Set gain with value 2
+> A7 03 31 00 00 02 00 FF
+< A7 83 31 00 00 02 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 02 00 00 00 FF
+
+# Action: click Read plate in luminescence mode with applied gain 2
+# Reading preparation resets the reader, then reapplies the last applied gain.
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 02 00 00 00 FF
+> A7 03 04 00 00 00 00 FF
+< A7 83 04 00 00 00 00 FF
+> A7 03 31 00 00 02 00 FF
+< A7 83 31 00 00 02 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 02 00 00 00 FF
+> A7 03 20 00 00 00 00 FF
+< A7 83 20 00 05 64 08 92 04 2C 05 2A 09 42 05 C6 06 26 09 64 06 FE 03 4E 07 26 0C 68 04 B8 04 86 03 DA 06 E0 05 9E 07 F4 09 9E 08 5A 02 A0 04 4E 05 DE 04 4C 04 CA 04 4C 06 DC 03 CC 04 2C 06 A6 10 62 06 86 06 40 0B 6A 04 F6 06 90 06 DA 05 76 0E 4C 07 8E 04 94 05 62 04 9C 0B 70 05 AA 07 0E 05 54 04 E2 0F 94 06 2E 06 BE 0A 28 0F 3E 05 D6 0D 2A 09 A6 04 20 05 80 04 88 06 AA 04 86 04 64 09 98 05 70 08 20 09 5C 03 8E 09 38 06 76 08 7A 06 56 06 80 06 C2 07 62 05 2A 09 E2 05 42 05 9C 0A CC 05 AC 04 7A 06 DA 0A 90 07 7C 04 90 05 6A 08 12 04 6A 03 A2 07 FA 04 48 05 3A 05 C0 07 0C 08 90 06 A0 00 FF
+
+# Vendor application display at gain 2 (RLU)
+# Columns:     1     2     3     4     5     6     7     8     9    10    11    12
+# A:        1380  2194  1068  1322  2370  1478  1574  2404  1790   846  1830  3176
+# B:        1208  1158   986  1760  1438  2036  2462  2138   672  1102  1502  1100
+# C:        1226  1100  1756   972  1068  1702  4194  1670  1600  2922  1270  1680
+# D:        1754  1398  3660  1934  1172  1378  1180  2928  1450  1806  1364  1250
+# E:        3988  1582  1726  2600  3902  1494  3370  2470  1056  1408  1160  1706
+# F:        1158  1124  2456  1392  2080  2396   910  2360  1654  2170  1622  1664
+# G:        1730  1890  1322  2530  1346  1436  2764  1452  1146  1754  2704  1916
+# H:        1168  1386  2066  1130   930  2042  1096  1338  1472  1804  2192  1696

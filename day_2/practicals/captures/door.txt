@@ -1,0 +1,29 @@
+# > host to reader; < reader to host
+# One complete message per line.
+# Initial state: freshly booted, door closed, default settings.
+
+# Scene: Before any clicks; door is closed
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+
+# Action: Click Open
+> A7 03 06 00 00 00 00 FF
+< A7 83 06 00 00 00 00 FF
+
+# Scene: Waiting after Open; door is open
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 01 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 01 00 FF
+
+# Action: Click Close
+> A7 03 07 00 00 00 00 FF
+< A7 83 07 00 00 00 00 FF
+
+# Scene: Waiting after Close; door is closed
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
+> A7 03 02 00 00 00 00 FF
+< A7 83 02 00 00 00 00 01 00 00 00 FF
